@@ -1,0 +1,89 @@
+<div id="ouput"></div>
+<script type="text/javascript">
+	var input=[
+		"b inc 5 if a > 1",
+		"a inc 1 if b < 5",
+		"c dec -10 if a >= 1",
+		"c inc -20 if c == 10"
+	]
+	var size = input.length
+
+	var registers = {};
+	for (var i = 0; i < size; i ++) {
+		var instructions = input[i].split(' ') 
+		console.log(instructions)
+		var register = instructions[0];
+		var operation = parseInt(instructions[1])
+		var value = parseInt(instructions[2])
+		var comparisonResult;
+		{
+			var register_to_consider = instructions[4]
+			var value_to_consider = parseInt(instructions[6])
+			//does register exist?
+			console.log(registers[register_to_consider])
+			if (!registers[register_to_consider]) {
+				registers[register_to_consider] = 0;
+			}
+
+			if (instructions[5] == "==") {
+				comparisonResult = registers[register_to_consider] == value_to_consider;
+			}
+			if (instructions[5] == "!=") {
+				comparisonResult = registers[register_to_consider] != value_to_consider;
+			}
+			if (instructions[5] == ">") {
+				comparisonResult = registers[register_to_consider] > value_to_consider;
+			}
+			if (instructions[5] == ">=") {
+				comparisonResult = registers[register_to_consider] >= value_to_consider;
+			}
+			if (instructions[5] == "<") {
+				comparisonResult = registers[register_to_consider] < value_to_consider;
+			}
+			if (instructions[5] == "<=") {
+				comparisonResult = registers[register_to_consider] <= value_to_consider;
+			}
+
+		}
+		if (comparisonResult) {
+			if (operation == "inc")
+				registers[register] += value
+			if (operation == "dec")
+				registers[register] -= value
+		}
+	}
+	var max = 0;
+	ouput.innerHTML = max;
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
