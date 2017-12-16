@@ -1,0 +1,47 @@
+<div id="ouput"></div>
+<script type="text/javascript">
+	// var input = [0, 2, 7, 0]
+	var input = [0, 5, 10, 0, 11, 14, 13, 4, 11, 8, 8, 7, 1, 4, 12, 11]
+	var pastCycles = [];
+	var cycles = 0;
+	var size = input.length
+	while(true) {
+		var maxPos = findMaxPos(input);
+		var max = input[maxPos];
+		input[maxPos] = 0;
+		var i = (maxPos+1)%size;
+		while (max > 0) {
+			input[i]++;
+			max--;
+			i++
+			if (i == size) {
+				i = 0;
+			}
+		}
+		cycles++;
+		//see if we are in a similar position to before
+		var currentCycle = input.toString();
+		if (find(currentCycle, pastCycles) != -1) {
+			ouput.innerHTML = pastCycles.length-find(currentCycle, pastCycles);
+			break;
+		} else {
+			// console.log(currentCycle)
+			pastCycles.push(currentCycle);
+		}
+	}
+	function findMaxPos(arr) {
+		var maxPos = 0
+		for (var i = 1; i < arr.length; i++) {
+			if (arr[i] > arr[maxPos])
+				maxPos = i;
+		}
+		return maxPos;
+	}
+	function find(val, arr) {
+		for (var i = 0; i < arr.length; i++) {
+			if (arr[i] == val)
+				return i;
+		}
+		return -1;
+	}
+</script>
